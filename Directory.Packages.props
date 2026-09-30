@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <!-- Enable central package management, https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled></CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.1" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.6.0" />
+  </ItemGroup>
+</Project>
