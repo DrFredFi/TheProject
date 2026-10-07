@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\TheProject.BuildingBlocks\TheProject.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\..\src\BuildingBlocks\TheProject.BuildingBlocks\TheProject.BuildingBlocks.csproj" />
   </ItemGroup>
 
 </Project>

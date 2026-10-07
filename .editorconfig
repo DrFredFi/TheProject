@@ -387,9 +387,15 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
-  [tests/**.cs]
+[tests/**.cs]
   # Test method names use underscores on purpose (Create_returns_201_when_valid).
   dotnet_diagnostic.CA1707.severity = none
   # Test projects are executables (xUnit v3), so CA1515 would ask for internal
   # types, but xUnit needs public test classes.
   dotnet_diagnostic.CA1515.severity = none
+  
+[src/BuildingBlocks/TheProject.BuildingBlocks/Results/*.cs]
+# Error is the domain term; CA1716 guards Visual Basic consumers, and TheProject is C# only.
+dotnet_diagnostic.CA1716.severity = none
+# Result<T>.Success/Failure are the intended factories; implicit conversions cover most call sites.
+dotnet_diagnostic.CA1000.severity = none  
