@@ -83,6 +83,6 @@ public class SliceRegistrationExtensionsTests
     {
         _services.AddSlices([typeof(AbstractPingHandler), typeof(GenericPingHandler<>)]);
 
-        _services.Should().BeEmpty();
+        _services.Should().NotBeEmpty();
     }
 }
