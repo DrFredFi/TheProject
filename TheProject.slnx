@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/build/">
+    <File Path="build/ci.cs" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/BuildingBlocks/TheProject.BuildingBlocks/TheProject.BuildingBlocks.csproj" />
   </Folder>
