@@ -1,4 +1,4 @@
- # TheProject
+# TheProject
 
 [![ci](https://github.com/DrFredFi/TheProject/actions/workflows/ci.yml/badge.svg)](https://github.com/DrFredFi/TheProject/actions/workflows/ci.yml)
 
@@ -6,9 +6,10 @@ TheProject is a production-style e-commerce backend built with .NET 10 microserv
 
 ## Build and test
 
-     Requires the .NET SDK version pinned in `global.json`.
+  Requires the .NET SDK version pinned in `global.json`.
 
-     ```shell
-     dotnet build TheProject.slnx
-     dotnet test --solution TheProject.slnx
-     ```
+  ```shell
+  dotnet build TheProject.slnx
+  dotnet test --solution TheProject.slnx
+  dotnet run build/ci.cs   # the full CI gate, exactly as GitHub Actions runs it
+  ```
