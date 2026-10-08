@@ -1,1 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspnetCore.App" />
+    <InternalsVisibleTo Include="TheProject.BuildingBlocks.Tests.Unit" />
+  </ItemGroup>
+</Project>
+
