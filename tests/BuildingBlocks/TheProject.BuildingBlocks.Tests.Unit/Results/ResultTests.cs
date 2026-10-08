@@ -134,6 +134,4 @@ public class ResultTests
         {Error.NotFound("c","d"),ErrorType.NotFound },
         {Error.Validation("c","d"),ErrorType.Validation},
     };
-
-
 }
