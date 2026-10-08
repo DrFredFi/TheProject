@@ -6,7 +6,8 @@ Shipping) built as vertical-slice services. Portfolio code: no scratch files, no
 ## Commands
 - Build: `dotnet build TheProject.slnx`
 - Test: `dotnet test --solution TheProject.slnx` (Microsoft.Testing.Platform mode; `--project <path>` for one project)
-- Full CI gate locally: use the `ci-local` skill
+- Full CI gate: `dotnet run build/ci.cs` (`-- --quiet` prints only the failing step), or the
+    `ci-local` skill. GitHub Actions runs the same file, so the gate's steps change only in `build/ci.cs`.
 
 ## Conventions Claude would otherwise get wrong
 - **Packages:** Central Package Management. Never put `Version=` on a `PackageReference`;

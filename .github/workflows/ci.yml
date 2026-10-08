@@ -25,14 +25,5 @@ jobs:
             with:
               global-json-file: global.json
             
-          - name: Restore
-            run: dotnet restore TheProject.slnx
-            
-          - name: Check formatting
-            run: dotnet format TheProject.slnx --verify-no-changes --no-restore
-           
-          - name: Build
-            run: dotnet build TheProject.slnx --configuration Release --no-restore
-           
-          - name: Test
-            run: dotnet test --solution TheProject.slnx --configuration Release --no-build
+          - name: CI gate
+            run: dotnet run build/ci.cs
