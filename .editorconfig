@@ -402,3 +402,7 @@ dotnet_diagnostic.CA1000.severity = none
 [src/**.cs]
 #I like to have underscores in constant names
 dotnet_diagnostic.CA1707.severity = none
+
+[src/Services/**/Persistence/Migrations/*.cs]
+# EF Core generates migrations; they are rewritten by the tool, never by hand.
+generated_code = true

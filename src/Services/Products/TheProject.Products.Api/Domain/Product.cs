@@ -8,17 +8,17 @@ public sealed class Product
     public Guid Id { get; private set; }
     public Sku Sku { get; private set; }
     public string Name { get; private set; }
-    public Money Price { get; private set; }
+    public Money Price { get; private set; } = null!;
     public DateTimeOffset CreatedAt { get; private set; }
     public DateTimeOffset UpdatedAt { get; private set; }
 
-
-    private Product(Guid id, Sku sku, string name, Money price, DateTimeOffset createdAt)
+    // EF CORE BINDS THIS CONSTRUCTOR => IT SETS PRICE AFTERWARDS, BECAUSE COMPLEX
+    // PROPERTIES CAN'T BE CONSTRUCTOR PARAMETERS. CREATE SETS IT WITH AN INITIALIZER.
+    private Product(Guid id, Sku sku, string name, DateTimeOffset createdAt)
     {
         Id = id;
         Sku = sku;
         Name = name;
-        Price = price;
         CreatedAt = createdAt;
         UpdatedAt = createdAt;
     }
@@ -31,7 +31,10 @@ public sealed class Product
             return error;
         }
 
-        return new Product(Guid.CreateVersion7(now), sku, name.Trim(), price, now);
+        return new Product(Guid.CreateVersion7(now), sku, name.Trim(), now)
+        {
+            Price = price,
+        };
     }
 
     public Result Update(string name, Money price, DateTimeOffset now)
