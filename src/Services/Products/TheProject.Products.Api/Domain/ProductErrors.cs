@@ -15,5 +15,9 @@ public static class ProductErrors
         $"Price must have at most two decimal places, but was {amount}.");
     public static Error CurrencyInvalid(string currency) => Error.Validation("Products.CurrencyInvalid",
         $"The currency '{currency}' must be a three-letter ISO 4217 code in upper case.");
+    public static Error NotFound(Guid id) => Error.NotFound("Products.NotFound",
+        $"The product with id {id} couldn't be found");
+    public static Error SkuTaken(Sku sku) => Error.Conflict("Products.SkuTaken",
+        $"The sku {sku} is already present in the databse");
 
 }
