@@ -6,7 +6,7 @@ using TheProject.Products.Api.Persistence;
 
 namespace TheProject.Products.Api.Features.Products.GetProduct;
 
-public class GetProductHandler(
+public sealed class GetProductHandler(
     ILogger<GetProductHandler> logger,
     ProductsDbContext db
     ) : IHandler<GetProductRequest, GetProductResponse>
@@ -19,20 +19,17 @@ public class GetProductHandler(
         var rto = await db.Products
             .AsNoTracking()
             .Where(p => p.Id == request.Id)
-            .Select(p => new GetProductResponse(
-                p.Id,
-                p.Sku.Value,
-                p.Name,
-                p.Price.Amount,
-                p.Price.Currency,
-                p.CreatedAt,
-                p.UpdatedAt,
-                EF.Property<uint>(p, ProductsDbContext.VersionProperty)))
+            .Select(GetProductMapping.ToResponse)
             .SingleOrDefaultAsync(cancellationToken);
 
-        ProductsLogger.ProductFound(logger, request.Id);
-
-        return rto is null ? ProductErrors.NotFound(request.Id)
-                           : rto;
+        if (rto is null)
+        {
+            return ProductErrors.NotFound(request.Id);
+        }
+        else
+        {
+            ProductsLogger.ProductFound(logger, request.Id);
+            return rto;
+        }
     }
 }

@@ -5,7 +5,19 @@ using TheProject.BuildingBlocks.Slices;
 
 namespace TheProject.Products.Api.Features.Products.GetProduct;
 
-public class GetProductEndpoint : IEndpoint
+public sealed record GetProductRequest(Guid Id);
+public sealed record GetProductResponse(
+    Guid Id,
+    string Sku,
+    string Name,
+    decimal Price,
+    string Currency,
+    DateTimeOffset CreatedAt,
+    DateTimeOffset UpdatedAt,
+    uint Version);
+
+
+public sealed class GetProductEndpoint : IEndpoint
 {
     public const string Name = "GetProduct";
     public void MapEndpoint(IEndpointRouteBuilder app)
@@ -15,7 +27,7 @@ public class GetProductEndpoint : IEndpoint
             .WithTags("Products");
     }
 
-    private async Task<Results<Ok<GetProductResponse>, ProblemHttpResult>> HandleAsync(
+    private static async Task<Results<Ok<GetProductResponse>, ProblemHttpResult>> HandleAsync(
         Guid id,
         IHandler<GetProductRequest, GetProductResponse> handler,
         CancellationToken ct

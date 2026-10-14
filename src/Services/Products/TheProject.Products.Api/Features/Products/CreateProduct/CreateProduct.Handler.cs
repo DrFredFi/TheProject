@@ -55,12 +55,6 @@ public sealed class CreateProductHandler(ProductsDbContext db,
 
         ProductsLogger.ProductCreated(logger, product.Id, product.Sku.Value);
 
-        return new CreateProductResponse(
-            product.Id,
-            product.Sku.Value,
-            product.Name,
-            product.Price.Amount,
-            product.Price.Currency,
-            product.CreatedAt);
+        return CreateProductMapping.ToResponse(product);
     }
 }

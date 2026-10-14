@@ -7,7 +7,18 @@ using TheProject.Products.Api.Features.Products.GetProduct;
 
 namespace TheProject.Products.Api.Features.Products.CreateProduct;
 
-public class CreateProductEndpoint : IEndpoint
+
+public sealed record CreateProductRequest(string Sku, string Name, decimal Price, string Currency);
+public sealed record CreateProductResponse(Guid Id,
+    string Sku,
+    string Name,
+    decimal Price,
+    string Currency,
+    DateTimeOffset CreatedAt);
+
+
+
+public sealed class CreateProductEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
@@ -16,7 +27,7 @@ public class CreateProductEndpoint : IEndpoint
             .WithTags("Products");
     }
 
-    private async Task<Results<CreatedAtRoute<CreateProductResponse>, ProblemHttpResult>> HandleAsync(
+    private static async Task<Results<CreatedAtRoute<CreateProductResponse>, ProblemHttpResult>> HandleAsync(
         [FromBody] CreateProductRequest request,
         IHandler<CreateProductRequest, CreateProductResponse> handler,
         CancellationToken ct)
@@ -24,7 +35,7 @@ public class CreateProductEndpoint : IEndpoint
         var rto = await handler.HandleAsync(request, ct);
 
         return rto.Match(Results<CreatedAtRoute<CreateProductResponse>, ProblemHttpResult>
-            (response) => TypedResults.CreatedAtRoute(response, GetProductEndpoint.Name, new { id = response.id }),
+            (response) => TypedResults.CreatedAtRoute(response, GetProductEndpoint.Name, new { id = response.Id }),
             (error) => error.ToProblem()
             );
 
