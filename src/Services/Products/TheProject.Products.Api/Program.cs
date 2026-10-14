@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ProductsDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("products"))
     .UseSnakeCaseNamingConvention();
 });
-
+builder.Services.AddSingleton(TimeProvider.System);
 
 builder.Services.AddSlices(typeof(Program).Assembly);
 

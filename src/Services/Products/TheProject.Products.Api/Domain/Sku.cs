@@ -9,12 +9,12 @@ public sealed partial record Sku
     public string Value { get; }
 
     private Sku(string value) => Value = value.Trim().ToUpperInvariant();
-    public static Result<Sku> Create(string Value)
+    public static Result<Sku> Create(string value)
     {
-        var normalized = Value.Trim().ToUpperInvariant();
+        var normalized = value.Trim().ToUpperInvariant();
         return normalized.Length <= MaxLength && Format().IsMatch(normalized)
             ? new Sku(normalized)
-            : ProductErrors.SkuInvalid(Value);
+            : ProductErrors.SkuInvalid(value);
 
     }
 
